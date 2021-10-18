@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A77F57DE-C50F-407F-ACCF-10C4C50BEB88}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>UI.Desktop</RootNamespace>
+    <AssemblyName>UI.Desktop</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FluentValidation, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.10.3.0\lib\netstandard2.0\FluentValidation.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Constantes\EstadoComprobanteFiscal.cs" />
+    <Compile Include="Constantes\TipoComprobante.cs" />
+    <Compile Include="Controladores\ClienteController.cs" />
+    <Compile Include="Controladores\EstadoCivilController.cs" />
+    <Compile Include="Controladores\GrupoClienteController.cs" />
+    <Compile Include="Controladores\NacionalidadController.cs" />
+    <Compile Include="Controladores\ProvinciaController.cs" />
+    <Compile Include="Controladores\ResponsabildadIVAController.cs" />
+    <Compile Include="Controladores\TipoDeDocumentoController.cs" />
+    <Compile Include="Controladores\Validaciones\CustomException.cs" />
+    <Compile Include="Formularios\ControlesExtensiones.cs" />
+    <Compile Include="Formularios\frmBuscarCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmBuscarCliente.Designer.cs">
+      <DependentUpon>frmBuscarCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\frmEditarCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmEditarCliente.Designer.cs">
+      <DependentUpon>frmEditarCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\frmGestionarCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmGestionarCliente.Designer.cs">
+      <DependentUpon>frmGestionarCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\frmMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmMenu.Designer.cs">
+      <DependentUpon>frmMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\IBuscarCliente.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\CargaDeCombos\GeneroViewModel.cs" />
+    <Compile Include="ViewModels\CargaDeCombos\LocalidadViewModel.cs" />
+    <Compile Include="ViewModels\Persistentes\ClienteViewModel.cs" />
+    <Compile Include="ViewModels\CargaDeGrillas\ClienteGridViewModel.cs" />
+    <Compile Include="ViewModels\CargaDeCombos\EstadoCivilViewModel.cs" />
+    <Compile Include="ViewModels\CargaDeCombos\GrupoClienteViewModel.cs" />
+    <Compile Include="ViewModels\CargaDeCombos\NacionalidadViewModel.cs" />
+    <Compile Include="ViewModels\Validadores\ClienteViewModelValidator.cs" />
+    <Compile Include="ViewModels\CargaDeCombos\ProvinciaViewModel.cs" />
+    <Compile Include="ViewModels\CargaDeCombos\ResponsabilidadIVAViewModel.cs" />
+    <Compile Include="ViewModels\CargaDeCombos\SubGrupoClienteViewModel.cs" />
+    <Compile Include="ViewModels\CargaDeCombos\TipoDeDocumentoViewModel.cs" />
+    <Compile Include="Controladores\Validaciones\Validator.cs" />
+    <EmbeddedResource Include="Formularios\frmBuscarCliente.resx">
+      <DependentUpon>frmBuscarCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmEditarCliente.resx">
+      <DependentUpon>frmEditarCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmGestionarCliente.resx">
+      <DependentUpon>frmGestionarCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmMenu.resx">
+      <DependentUpon>frmMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Dominio\Dominio.csproj">
+      <Project>{3db356d2-5500-40e9-b568-7742e306a0f5}</Project>
+      <Name>Dominio</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Servicios.Contratos\Servicios.Contratos.csproj">
+      <Project>{c4c2386f-c7b7-4268-bf7a-6536390ea95c}</Project>
+      <Name>Servicios.Contratos</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Servicios\Servicios.csproj">
+      <Project>{48f7d969-b535-4819-897f-52f077980f10}</Project>
+      <Name>Servicios</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UnitOfWork.SqlServer\UnitOfWork.SqlServer.csproj">
+      <Project>{6e0d4f98-ddbf-4930-8629-a80590f91193}</Project>
+      <Name>UnitOfWork.SqlServer</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\club-de-pescadores-487x365.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow-icon-14-00db1a-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow-icon-14-ff0000-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow-icon-14-ff0000-16 - copia.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

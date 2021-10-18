@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3DB356D2-5500-40E9-B568-7742E306A0F5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Dominio</RootNamespace>
+    <AssemblyName>Dominio</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FluentValidation, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.10.3.0\lib\netstandard2.0\FluentValidation.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Contratos\IActividadLaboralRepository.cs" />
+    <Compile Include="Contratos\IClienteRepository.cs" />
+    <Compile Include="Contratos\IEstadoCivilRepository.cs" />
+    <Compile Include="Contratos\IGrupoPorItemResumenArqueoRepository.cs" />
+    <Compile Include="Contratos\IGrupoClienteRepository.cs" />
+    <Compile Include="Contratos\IHistorialLaboralRepository.cs" />
+    <Compile Include="Contratos\ILocalidadRepository.cs" />
+    <Compile Include="Contratos\INacionalidadRepository.cs" />
+    <Compile Include="Contratos\IProvinciaRepository.cs" />
+    <Compile Include="Contratos\IResponsabilidadIVARepository.cs" />
+    <Compile Include="Contratos\ISubGrupoClienteRepository.cs" />
+    <Compile Include="Contratos\ITipoActividadLaboralRepository.cs" />
+    <Compile Include="Contratos\ITipoDeDocumentoRepository.cs" />
+    <Compile Include="Entidades\ArticuloServicio\Marca.cs" />
+    <Compile Include="Entidades\ArticuloServicio\Servicio.cs" />
+    <Compile Include="Entidades\Caja.Apertura\Apertura.cs" />
+    <Compile Include="Entidades\ArticuloServicio\Articulo.cs" />
+    <Compile Include="Entidades\ArticuloServicio\Categoria.cs" />
+    <Compile Include="Entidades\Caja.Arqueo\Arqueo.cs" />
+    <Compile Include="Entidades\Caja.Cierre\BoletaDeDepositoInternaPorCierre.cs" />
+    <Compile Include="Entidades\Caja.Cierre\ChequePorCierre.cs" />
+    <Compile Include="Entidades\Caja.Cierre\Cierre.cs" />
+    <Compile Include="Entidades\Caja.Configuracion\ConceptoDeTipoMovimiento.cs" />
+    <Compile Include="Entidades\Caja.Arqueo\DeclaracionArqueo.cs" />
+    <Compile Include="Entidades\Caja.Cierre\EstadoDeCierre.cs" />
+    <Compile Include="Entidades\Caja.Cierre\EstadoDiferenciaCaja.cs" />
+    <Compile Include="Entidades\Caja.Arqueo\GrupoPorItemResumenArqueo.cs" />
+    <Compile Include="Entidades\Caja.Cierre\ItemCierre.cs" />
+    <Compile Include="Entidades\Caja.Cierre\ItemCierrePorCierre.cs" />
+    <Compile Include="Entidades\Caja.Arqueo\ItemDeclaracionArqueo.cs" />
+    <Compile Include="Entidades\Caja.Arqueo\ItemDeclaracionArqueoPorDeclaracion.cs" />
+    <Compile Include="Entidades\Caja.Arqueo\ItemResumenArqueo.cs" />
+    <Compile Include="Entidades\Caja.Arqueo\ItemResumenArqueoPorResumen.cs" />
+    <Compile Include="Entidades\Caja.Configuracion\NumeradorPorTerminal.cs" />
+    <Compile Include="Entidades\Caja.Arqueo\ResumenArqueo.cs" />
+    <Compile Include="Entidades\Caja.Configuracion\PuntoDeVentaPorTerminal.cs" />
+    <Compile Include="Entidades\Caja.Configuracion\RolPorTipoTerminal.cs" />
+    <Compile Include="Entidades\Caja.Configuracion\Terminal.cs" />
+    <Compile Include="Entidades\Caja.Configuracion\TipoMovimiento.cs" />
+    <Compile Include="Entidades\Caja.Configuracion\TipoMovimientoPorTipoTerminal.cs" />
+    <Compile Include="Entidades\Caja.Configuracion\TipoTerminal.cs" />
+    <Compile Include="Entidades\Cheque\TipoCheque.cs" />
+    <Compile Include="Entidades\Cliente\ActividadLaboral.cs" />
+    <Compile Include="Entidades\Cliente\EstadoCivil.cs" />
+    <Compile Include="Entidades\Cliente\GrupoCliente.cs" />
+    <Compile Include="Entidades\Cliente\HistorialLaboral.cs" />
+    <Compile Include="Entidades\ConfiguracionFiscal\ModeloFiscal.cs" />
+    <Compile Include="Entidades\General\Nacionalidad.cs" />
+    <Compile Include="Entidades\Cliente\Puesto.cs" />
+    <Compile Include="Entidades\Cliente\SubGrupoCliente.cs" />
+    <Compile Include="Entidades\Cliente\TipoActividadLaboral.cs" />
+    <Compile Include="Entidades\AnulacionRecibo\AnulacionRecibo.cs" />
+    <Compile Include="Entidades\AnulacionRecibo\AnulacionReciboPorVencimiento.cs" />
+    <Compile Include="Entidades\BoletaDeDepositoBancaria\BoletaDeDepositoBancaria.cs" />
+    <Compile Include="Entidades\BoletaDeDepositoInterna\BoletaDeDepositoInterna.cs" />
+    <Compile Include="Entidades\Cheque\Cheque.cs" />
+    <Compile Include="Entidades\Cheque\ChequePorBoletaDeDepositoInterna.cs" />
+    <Compile Include="Entidades\Cheque\ChequePorDiferenciaCaja.cs" />
+    <Compile Include="Entidades\Cheque\ChequePorRecibo.cs" />
+    <Compile Include="Entidades\AnulacionRecibo\ConceptoAnulacionRecibo.cs" />
+    <Compile Include="Entidades\Cotizacion\EstadoPorTipoCotizacion.cs" />
+    <Compile Include="Entidades\Cotizacion\HistorialCotizacion.cs" />
+    <Compile Include="Entidades\Cotizacion\ItemCotizacion.cs" />
+    <Compile Include="Entidades\Cotizacion\ItemCotizacionPorArticulo.cs" />
+    <Compile Include="Entidades\Cotizacion\ItemCotizacionPorServicio.cs" />
+    <Compile Include="Entidades\Cotizacion\TipoCotizacion.cs" />
+    <Compile Include="Entidades\ConfiguracionFiscal\PuntoDeVenta.cs" />
+    <Compile Include="Entidades\ConfiguracionFiscal\NumeradoresPorPuntoDeVenta.cs" />
+    <Compile Include="Entidades\FondoFijo\EstadoVale.cs" />
+    <Compile Include="Entidades\FondoFijo\ProveedorFondoFijo.cs" />
+    <Compile Include="Entidades\FondoFijo\Rendicion.cs" />
+    <Compile Include="Entidades\FondoFijo\TipoComprobanteFondoFijo.cs" />
+    <Compile Include="Entidades\FondoFijo\ValeDeGastoARendir.cs" />
+    <Compile Include="Entidades\FondoFijo\ValeDeGastoARendirPorRendicion.cs" />
+    <Compile Include="Entidades\General\Banco.cs" />
+    <Compile Include="Entidades\General\BancoSucursal.cs" />
+    <Compile Include="Entidades\General\CondicionDeVenta.cs" />
+    <Compile Include="Entidades\General\Localidad.cs" />
+    <Compile Include="Entidades\General\MedioDePago.cs" />
+    <Compile Include="Entidades\General\Moneda.cs" />
+    <Compile Include="Entidades\Proveedor\GrupoProveedor.cs" />
+    <Compile Include="Entidades\Proveedor\Proveedor.cs" />
+    <Compile Include="Entidades\General\TasaIVA.cs" />
+    <Compile Include="Entidades\Persona\Persona.cs" />
+    <Compile Include="Entidades\NotaDeCredito\ConceptoNotaDeCredito.cs" />
+    <Compile Include="Entidades\AnulacionRecibo\CondicionDeVentaPorAnulacionRecibo.cs" />
+    <Compile Include="Entidades\Persona\Provincia.cs" />
+    <Compile Include="Entidades\Persona\ResponsabilidadIVA.cs" />
+    <Compile Include="Entidades\Persona\TipoDeDocumento.cs" />
+    <Compile Include="Entidades\Proveedor\SubGrupoProveedor.cs" />
+    <Compile Include="Entidades\Recibo\CondicionDeVentaPorRecibo.cs" />
+    <Compile Include="Entidades\Caja.Cierre\DiferenciaCaja.cs" />
+    <Compile Include="Entidades\BoletaDeDepositoInterna\EstadoBoletaDeDeposito.cs" />
+    <Compile Include="Entidades\BoletaDeDepositoBancaria\EstadoBoletaDeDepositoBancaria.cs" />
+    <Compile Include="Entidades\Cheque\EstadoCheque.cs" />
+    <Compile Include="Entidades\ClasificacionComprobante\EstadoComprobanteFiscal.cs" />
+    <Compile Include="Entidades\ClasificacionComprobante\EstadoPorTipoComprobante.cs" />
+    <Compile Include="Entidades\Factura\FacturaPorCotizacion.cs" />
+    <Compile Include="Entidades\FacturaProveedor\FacturaProveedor.cs" />
+    <Compile Include="Entidades\Cheque\HistorialCheque.cs" />
+    <Compile Include="Entidades\Factura\ItemFacturaPorArticulo.cs" />
+    <Compile Include="Entidades\Factura\ItemFacturaPorItemCotizacion.cs" />
+    <Compile Include="Entidades\Factura\ItemFacturaPorServicio.cs" />
+    <Compile Include="Entidades\FacturaProveedor\ItemFacturaProveedor.cs" />
+    <Compile Include="Entidades\FacturaProveedor\ItemFacturaProveedorPorArticulo.cs" />
+    <Compile Include="Entidades\FacturaProveedor\ItemFacturaProveedorPorServicio.cs" />
+    <Compile Include="Entidades\NotaDeCredito\ItemNotaDeCredito.cs" />
+    <Compile Include="Entidades\NotaDeCredito\ItemNotaDeCreditoPorArticulo.cs" />
+    <Compile Include="Entidades\NotaDeCredito\ItemNotaDeCreditoPorItemFactura.cs" />
+    <Compile Include="Entidades\NotaDeCredito\ItemNotaDeCreditoPorServicio.cs" />
+    <Compile Include="Entidades\OrdenDeCompra\ItemOrdenDeCompra.cs" />
+    <Compile Include="Entidades\OrdenDeCompra\ItemOrdenDeCompraPorArticulo.cs" />
+    <Compile Include="Entidades\OrdenDeCompra\ItemOrdenDeCompraPorServicio.cs" />
+    <Compile Include="Entidades\NotaDeCredito\NotaDeCredito.cs" />
+    <Compile Include="Entidades\NotaDeCredito\NotaDeCreditoPorFactura.cs" />
+    <Compile Include="Entidades\NotaDeCredito\NotaDeCreditoPorVencimiento.cs" />
+    <Compile Include="Entidades\OrdenDeCompra\OrdenDeCompra.cs" />
+    <Compile Include="Entidades\OrdenDePagoProveedor\OrdenDePagoPorVencimientoProveedor.cs" />
+    <Compile Include="Entidades\OrdenDePagoProveedor\OrdenDePagoProveedor.cs" />
+    <Compile Include="Entidades\Recibo\Recibo.cs" />
+    <Compile Include="Entidades\Recibo\ReciboPorVencimiento.cs" />
+    <Compile Include="Entidades\ReciboProveedor\ReciboProveedor.cs" />
+    <Compile Include="Entidades\ClasificacionComprobante\SubtipoPorTipo.cs" />
+    <Compile Include="Entidades\ClasificacionComprobante\TipoComprobante.cs" />
+    <Compile Include="Entidades\Factura\TipoRelacionFacturaCotizacion.cs" />
+    <Compile Include="Entidades\Factura\Vencimiento.cs" />
+    <Compile Include="Entidades\Factura\VencimientoPorFactura.cs" />
+    <Compile Include="Entidades\FacturaProveedor\VencimientoPorFacturaProveedor.cs" />
+    <Compile Include="Entidades\FacturaProveedor\VencimientoProveedor.cs" />
+    <Compile Include="Entidades\Cotizacion\Cotizacion.cs" />
+    <Compile Include="Entidades\Cotizacion\CotizacionPorCondicionDeVenta.cs" />
+    <Compile Include="Entidades\Cotizacion\CotizacionPorTasaIVA.cs" />
+    <Compile Include="Entidades\Cliente\Cliente.cs" />
+    <Compile Include="Entidades\Factura\Factura.cs" />
+    <Compile Include="Entidades\ArticuloServicio\ImpuestoInterno.cs" />
+    <Compile Include="Entidades\Factura\ItemFactura.cs" />
+    <Compile Include="Entidades\ArticuloServicio\SubCategoria.cs" />
+    <Compile Include="Entidades\ArticuloServicio\TipoDeServicio.cs" />
+    <Compile Include="Entidades\Seguridad\Funcionalidad.cs" />
+    <Compile Include="Entidades\Seguridad\FuncionalidadPorRol.cs" />
+    <Compile Include="Entidades\Seguridad\Permiso.cs" />
+    <Compile Include="Entidades\Seguridad\PermisoPorRol.cs" />
+    <Compile Include="Entidades\Seguridad\PermisoPorUsuario.cs" />
+    <Compile Include="Entidades\Seguridad\Rol.cs" />
+    <Compile Include="Entidades\Seguridad\RolPorUsuario.cs" />
+    <Compile Include="Entidades\Seguridad\Usuario.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SeedWork\Acciones\IReadRepository.cs" />
+    <Compile Include="SeedWork\Acciones\IRemoveRepository.cs" />
+    <Compile Include="SeedWork\Acciones\ISaveRepository.cs" />
+    <Compile Include="SeedWork\IUnitOfWork.cs" />
+    <Compile Include="SeedWork\IUnitOfWorkAdapter.cs" />
+    <Compile Include="SeedWork\IUnitOfWorkRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
