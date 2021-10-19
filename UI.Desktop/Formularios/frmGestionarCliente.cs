@@ -131,13 +131,6 @@ namespace UI.Desktop.Formularios
 
         private void InicializaCombos()
         {
-            //cbEstadoCivil.SelectedIndex = 1;
-            //cbGrupo.SelectedIndex = 1;
-            //cbNacionalidad.SelectedIndex = 1;
-            //cbResponsabilidad.SelectedIndex = 1;
-            //cbSexo.SelectedIndex = 1;
-            //cbSubgrupo.SelectedIndex = 1;
-            //cbTipoDoc.SelectedIndex = 1;
         }
 
         private void btnImprimir_Click(object sender, EventArgs e)
@@ -170,38 +163,6 @@ namespace UI.Desktop.Formularios
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            //if (dgvGrilla.CurrentRow != null)
-            //{
-            //    DialogResult result = MessageBox.Show("Seguro que dese borrar?", "Borrar", MessageBoxButtons.YesNo);
-            //    if (result == DialogResult.Yes)
-            //    {
-            //        //probamos con borrar
-            //        try
-            //        {
-            //            _libroBO.Eliminar((Entidades.LibroEntity)dgvGrilla.CurrentRow.DataBoundItem);
-            //            this.mOK("Se borró de forma correcta");
-            //            this.limpiar();
-            //            this.tabControl.SelectedIndex = 0;
-            //        }
-            //        catch (Exception ex)
-            //        {
-            //            //Si optó por guardar y dá algun error muestro el mensaje generado por la excepcion
-            //            this.mError(ex.Message);
-            //        }
-            //    }
-            //    else
-            //    //si se arrepiente de borrar
-            //    {
-            //        return;
-            //    }
-            //    //Llenamos el DataGridView con la informacion
-            //    cargaGrilla("");
-            //    estiloGrilla();
-            //}
-            //else
-            //{
-            //    this.mError("Debe seleccionar un registro...");
-            //}
         }
 
         private void dgvGrilla_MouseClick(object sender, MouseEventArgs e)

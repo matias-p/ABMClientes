@@ -20,7 +20,6 @@ namespace UI.Desktop.Formularios
         {
             this.IsMdiContainer = true;
             this.WindowState = FormWindowState.Maximized;
-            //frmFacturar formRealizarVenta = frmFacturar.GetInstancia();
         }
 
         private void resguardarDatosToolStripMenuItem_Click(object sender, EventArgs e)

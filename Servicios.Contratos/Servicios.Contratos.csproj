@@ -43,13 +43,11 @@
   <ItemGroup>
     <Compile Include="IClienteService.cs" />
     <Compile Include="IEstadoCivilService.cs" />
-    <Compile Include="IFacturaService.cs" />
     <Compile Include="IGrupoClienteService.cs" />
     <Compile Include="ILocalidadService.cs" />
     <Compile Include="INacionalidadService.cs" />
     <Compile Include="IProvinciaService.cs" />
     <Compile Include="IResponsabilidadIVAService.cs" />
-    <Compile Include="IServicioService.cs" />
     <Compile Include="ISubGrupoClienteService.cs" />
     <Compile Include="ITipoDeDocumentoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

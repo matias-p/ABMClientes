@@ -47,7 +47,6 @@
     <Compile Include="Contratos\IActividadLaboralRepository.cs" />
     <Compile Include="Contratos\IClienteRepository.cs" />
     <Compile Include="Contratos\IEstadoCivilRepository.cs" />
-    <Compile Include="Contratos\IGrupoPorItemResumenArqueoRepository.cs" />
     <Compile Include="Contratos\IGrupoClienteRepository.cs" />
     <Compile Include="Contratos\IHistorialLaboralRepository.cs" />
     <Compile Include="Contratos\ILocalidadRepository.cs" />
