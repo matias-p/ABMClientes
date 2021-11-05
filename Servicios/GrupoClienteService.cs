@@ -2,6 +2,7 @@
 using Dominio.SeedWork;
 using Servicios.Contratos;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Servicios
 {
@@ -14,25 +15,25 @@ namespace Servicios
             _unitOfWork = unitOfWork;
         }
 
-        public GrupoCliente Get(int id)
+        public async Task<GrupoCliente> Get(int id)
         {
             using (var context = _unitOfWork.Create())
             {
-                var grupoCliente = context.Repositories.GrupoClienteRepository.Get(id);
+                var grupoCliente = await context.Repositories.GrupoClienteRepository.Get(id);
 
                 return grupoCliente;
             }
         }
 
-        public IEnumerable<GrupoCliente> GetAll()
+        public async Task<IEnumerable<GrupoCliente>> GetAll()
         {
             using (var context = _unitOfWork.Create())
             {
-                var gruposCliente = context.Repositories.GrupoClienteRepository.GetAll();
+                var gruposCliente = await context.Repositories.GrupoClienteRepository.GetAll();
 
                 foreach (var item in gruposCliente)
                 {
-                    item.SubGruposCliente = context.Repositories.SubGrupoClienteRepository.GetAllByGrupoClienteID(item.ID);
+                    item.SubGruposCliente = await context.Repositories.SubGrupoClienteRepository.GetAllByGrupoClienteID(item.ID);
                 }
 
                 return gruposCliente;

@@ -1,6 +1,7 @@
 ﻿using UI.Desktop.ViewModels;
 using Servicios.Contratos;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace UI.Desktop.Controladores
 {
@@ -13,9 +14,9 @@ namespace UI.Desktop.Controladores
             _servicio = servicio;
         }
 
-        public IEnumerable<ResponsabilidadIVAViewModel> GetResponsabilidadesIVA()
+        public async Task<IEnumerable<ResponsabilidadIVAViewModel>> GetResponsabilidadesIVA()
         {
-            var responsabilidades = _servicio.GetAll();
+            var responsabilidades = await _servicio.GetAll();
 
             List<ResponsabilidadIVAViewModel> viewModel = new List<ResponsabilidadIVAViewModel>();
 

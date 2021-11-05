@@ -39,7 +39,7 @@ namespace UI.Desktop.Formularios
         {
             try
             {
-                this.dgvGrilla.DataSource = clienteController.GetClientes(texto);
+                this.dgvGrilla.DataSource = clienteController.GetClientes();
                 this.dgvGrilla.AutoGenerateColumns = false;
                 this.dgvGrilla.Columns[0].Visible = false;
             }

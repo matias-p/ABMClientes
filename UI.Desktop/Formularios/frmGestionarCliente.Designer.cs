@@ -160,7 +160,6 @@
             this.txtBuscarCliente.Name = "txtBuscarCliente";
             this.txtBuscarCliente.Size = new System.Drawing.Size(423, 24);
             this.txtBuscarCliente.TabIndex = 2;
-            this.txtBuscarCliente.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtBuscarCliente_KeyUp);
             // 
             // dgvGrilla
             // 

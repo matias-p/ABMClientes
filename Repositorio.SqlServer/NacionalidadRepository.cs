@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using Dominio.Entidades.General;
 using Dominio.Contratos;
 using System.Data;
+using System.Threading.Tasks;
 
 namespace Repositorio.SqlServer
 {
@@ -15,7 +16,7 @@ namespace Repositorio.SqlServer
             this._transaction = transaction;
         }
 
-        public Nacionalidad Get(int id)
+        public async Task<Nacionalidad> Get(int id)
         {
             var result = new Nacionalidad();
 
@@ -26,7 +27,7 @@ namespace Repositorio.SqlServer
             command.CommandType = CommandType.StoredProcedure;
             command.Parameters.AddWithValue("@ID", id);
 
-            using (var reader = command.ExecuteReader())
+            using (var reader = await command.ExecuteReaderAsync())
             {
                 if (reader.Read())
                 {
@@ -37,16 +38,17 @@ namespace Repositorio.SqlServer
             return result;
         }
 
-        public IEnumerable<Nacionalidad> GetAll()
+        public async Task<IEnumerable<Nacionalidad>> GetAll()
         {
             var resultList = new List<Nacionalidad>();
 
             //el método CreateCommand de la clase abstracta Repository retorna un SqlCommand
-            var query = @"GN_Nacionalidad_SEL_All";
+            //cuando un SP_pK no recibe parametros, devuelve todos los registros de la tabla.
+            var query = @"GN_Nacionalidad_SEL_pK";
             var command = CreateCommand(query);
             command.CommandType = CommandType.StoredProcedure;
 
-            using (var reader = command.ExecuteReader())
+            using (var reader = await command.ExecuteReaderAsync())
             {
                 while (reader.Read())
                 {

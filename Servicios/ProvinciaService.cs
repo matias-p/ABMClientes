@@ -3,6 +3,7 @@ using Dominio.Entidades.Persona;
 using Dominio.SeedWork;
 using Servicios.Contratos;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Servicios
 {
@@ -15,25 +16,25 @@ namespace Servicios
             _unitOfWork = unitOfWork;
         }
 
-        public Provincia Get(int id)
+        public async Task<Provincia> Get(int id)
         {
             using (var context = _unitOfWork.Create())
             {
-                var provincia = context.Repositories.ProvinciaRepository.Get(id);
+                var provincia = await context.Repositories.ProvinciaRepository.Get(id);
 
                 return provincia;
             }
         }
 
-        public IEnumerable<Provincia> GetAll()
+        public async Task<IEnumerable<Provincia>> GetAll()
         {
             using (var context = _unitOfWork.Create())
             {
-                var provincias = context.Repositories.ProvinciaRepository.GetAll();
+                var provincias = await context.Repositories.ProvinciaRepository.GetAll();
 
                 foreach (var item in provincias)
                 {
-                    item.Localidades = context.Repositories.LocalidadRepository.GetAllByProvinciaID(item.ID);
+                    item.Localidades = await context.Repositories.LocalidadRepository.GetAllByProvinciaID(item.ID);
                 }
 
                 return provincias;

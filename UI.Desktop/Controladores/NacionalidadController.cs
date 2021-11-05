@@ -1,6 +1,7 @@
 ﻿using UI.Desktop.ViewModels;
 using Servicios.Contratos;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace UI.Desktop.Controladores
 {
@@ -13,9 +14,9 @@ namespace UI.Desktop.Controladores
             _servicio = servicio;
         }
 
-        public IEnumerable<NacionalidadViewModel> GetNacionalidades()
+        public async Task<IEnumerable<NacionalidadViewModel>> GetNacionalidades()
         {
-            var nacionalidades = _servicio.GetAll();
+            var nacionalidades = await _servicio.GetAll();
 
             List<NacionalidadViewModel> viewModel = new List<NacionalidadViewModel>();
 

@@ -1,7 +1,9 @@
-﻿namespace Dominio.SeedWork
+﻿using System.Threading.Tasks;
+
+namespace Dominio.SeedWork
 {
     public interface ISaveRepository<T> where T : class
     {
-        void Save(T t);
+        Task Save(T t);
     }
 }

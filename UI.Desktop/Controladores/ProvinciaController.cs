@@ -1,6 +1,7 @@
 ﻿using UI.Desktop.ViewModels;
 using Servicios.Contratos;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace UI.Desktop.Controladores
 {
@@ -13,9 +14,9 @@ namespace UI.Desktop.Controladores
             _servicio = servicio;
         }
 
-        public IEnumerable<ProvinciaViewModel> GetProvincias()
+        public async Task<IEnumerable<ProvinciaViewModel>> GetProvincias()
         {
-            var Provincias = _servicio.GetAll();
+            var Provincias = await _servicio.GetAll();
 
             List<ProvinciaViewModel> provinciaViewModel = new List<ProvinciaViewModel>();
 

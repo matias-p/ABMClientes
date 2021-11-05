@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using Dominio.Entidades.General;
 using Dominio.Contratos;
 using System.Data;
+using System.Threading.Tasks;
 
 namespace Repositorio.SqlServer
 {
@@ -15,7 +16,7 @@ namespace Repositorio.SqlServer
             this._transaction = transaction;
         }
 
-        public Localidad Get(int id)
+        public async Task<Localidad> Get(int id)
         {
             var result = new Localidad();
 
@@ -26,7 +27,7 @@ namespace Repositorio.SqlServer
             command.CommandType = CommandType.StoredProcedure;
             command.Parameters.AddWithValue("@ID", id);
 
-            using (var reader = command.ExecuteReader())
+            using (var reader = await command.ExecuteReaderAsync())
             {
                 if (reader.Read())
                 {
@@ -37,16 +38,17 @@ namespace Repositorio.SqlServer
             return result;
         }
 
-        public IEnumerable<Localidad> GetAll()
+        public async Task<IEnumerable<Localidad>> GetAll()
         {
             var resultList = new List<Localidad>();
 
             //el método CreateCommand de la clase abstracta Repository retorna un SqlCommand
-            var query = @"GN_Localidad_SEL_All";
+            //cuando un SP_pK no recibe parametros, devuelve todos los registros de la tabla.
+            var query = @"GN_Localidad_SEL_pK";
             var command = CreateCommand(query);
             command.CommandType = CommandType.StoredProcedure;
 
-            using (var reader = command.ExecuteReader())
+            using (var reader = await command.ExecuteReaderAsync())
             {
                 while (reader.Read())
                 {
@@ -58,7 +60,7 @@ namespace Repositorio.SqlServer
             return resultList;
         }
 
-        public IEnumerable<Localidad> GetAllByProvinciaID(int provinciaID)
+        public async Task<IEnumerable<Localidad>> GetAllByProvinciaID(int provinciaID)
         {
             var resultList = new List<Localidad>();
 
@@ -69,7 +71,7 @@ namespace Repositorio.SqlServer
             command.CommandType = CommandType.StoredProcedure;
             command.Parameters.AddWithValue("@provinciaID", provinciaID);
 
-            using (var reader = command.ExecuteReader())
+            using (var reader = await command.ExecuteReaderAsync())
             {
                 while (reader.Read())
                 {

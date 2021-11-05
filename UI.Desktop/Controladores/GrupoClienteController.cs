@@ -1,6 +1,7 @@
 ﻿using UI.Desktop.ViewModels;
 using Servicios.Contratos;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace UI.Desktop.Controladores
 {
@@ -13,9 +14,9 @@ namespace UI.Desktop.Controladores
             _servicio = servicio;
         }
 
-        public IEnumerable<GrupoClienteViewModel> GetGrupos()
+        public async Task<IEnumerable<GrupoClienteViewModel>> GetGrupos()
         {
-            var grupos = _servicio.GetAll();
+            var grupos = await _servicio.GetAll();
 
             List<GrupoClienteViewModel> grupoViewModel = new List<GrupoClienteViewModel>();
 

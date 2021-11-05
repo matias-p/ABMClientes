@@ -2,6 +2,7 @@
 using Dominio.SeedWork;
 using Servicios.Contratos;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Servicios
 {
@@ -14,21 +15,21 @@ namespace Servicios
             _unitOfWork = unitOfWork;
         }
 
-        public TipoDeDocumento Get(int id)
+        public async Task<TipoDeDocumento> Get(int id)
         {
             using (var context = _unitOfWork.Create())
             {
-                var tipoDeDocumento = context.Repositories.TipoDeDocumentoRepository.Get(id);
+                var tipoDeDocumento = await context .Repositories.TipoDeDocumentoRepository.Get(id);
 
                 return tipoDeDocumento;
             }
         }
 
-        public IEnumerable<TipoDeDocumento> GetAll()
+        public async Task<IEnumerable<TipoDeDocumento>> GetAll()
         {
             using (var context = _unitOfWork.Create())
             {
-                var tiposDeDocumento = context.Repositories.TipoDeDocumentoRepository.GetAll();
+                var tiposDeDocumento = await context .Repositories.TipoDeDocumentoRepository.GetAll();
 
                 return tiposDeDocumento;
             }

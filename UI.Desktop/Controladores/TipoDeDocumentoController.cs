@@ -1,6 +1,7 @@
 ﻿using UI.Desktop.ViewModels;
 using Servicios.Contratos;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace UI.Desktop.Controladores
 {
@@ -13,9 +14,9 @@ namespace UI.Desktop.Controladores
             _servicio = servicio;
         }
 
-        public IEnumerable<TipoDeDocumentoViewModel> GetTiposDeDocumento()
+        public async Task<IEnumerable<TipoDeDocumentoViewModel>> GetTiposDeDocumento()
         {
-            var tipos = _servicio.GetAll();
+            var tipos = await _servicio.GetAll();
 
             List<TipoDeDocumentoViewModel> viewModel = new List<TipoDeDocumentoViewModel>();
 

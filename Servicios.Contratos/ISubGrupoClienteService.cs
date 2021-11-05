@@ -1,11 +1,13 @@
 ﻿using Dominio.Entidades.Cliente;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+
 namespace Servicios.Contratos
 {
     public interface ISubGrupoClienteService
     {
-        IEnumerable<SubGrupoCliente> GetAll();
-        SubGrupoCliente Get(int id);
-        IEnumerable<SubGrupoCliente> GetAllByGrupoClienteID(int grupoClienteID);
+        Task<IEnumerable<SubGrupoCliente>> GetAll();
+        Task<SubGrupoCliente> Get(int id);
+        Task<IEnumerable<SubGrupoCliente>> GetAllByGrupoClienteID(int grupoClienteID);
     }
 }

@@ -3,6 +3,7 @@ using UI.Desktop.ViewModels;
 using Servicios.Contratos;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace UI.Desktop.Controladores
 {
@@ -19,7 +20,7 @@ namespace UI.Desktop.Controladores
             _servicio = servicio;
         }
 
-        public string SaveCliente(ClienteViewModel vm)
+        public async Task<string> SaveCliente(ClienteViewModel vm)
         {
             var Cliente = new Dominio.Entidades.Cliente.Cliente()
             {
@@ -53,7 +54,7 @@ namespace UI.Desktop.Controladores
 
             try
             {
-                _servicio.Save(Cliente);
+                await _servicio.Save(Cliente);
             }
             catch (Exception ex)
             {
@@ -73,9 +74,9 @@ namespace UI.Desktop.Controladores
         /// <summary>
         /// Este método devuelve una coleccion de ClienteViewModel.
         /// </summary>
-        public IEnumerable<ClienteGridViewModel> GetClientes(string texto)
+        public async Task<IEnumerable<ClienteGridViewModel>> GetClientes()
         {
-            var clientes = _servicio.GetAllByNombreYApellido(texto);
+            var clientes = await _servicio.GetAll();
 
             List<ClienteGridViewModel> viewModel = new List<ClienteGridViewModel>();
             GeneroViewModel generos = new GeneroViewModel();

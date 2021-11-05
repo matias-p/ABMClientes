@@ -2,12 +2,6 @@
 using Servicios;
 using Servicios.Contratos;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using UI.Desktop.Controladores;
@@ -89,11 +83,11 @@ namespace UI.Desktop.Formularios
 
         }
 
-        private void frmEditarCliente_Load(object sender, EventArgs e)
+        private async void frmEditarCliente_Load(object sender, EventArgs e)
         {
             this.txtCuilCuit.Mask = "00-00000000-0";
 
-            this.CargaCombos();
+            await CargaCombos();
 
             if (registroSeleccionado != null)
             {                
@@ -167,10 +161,10 @@ namespace UI.Desktop.Formularios
             this.dtFechaNacimiento.Enabled = valor;
         }
 
-        private void CargaCombos()
+        private async Task CargaCombos()
         {
             //cbGrupo
-            this.cbGrupo.DataSource = grupoClienteController.GetGrupos();
+            this.cbGrupo.DataSource = await grupoClienteController.GetGrupos();
             this.cbGrupo.DisplayMember = "Descripcion";
             this.cbGrupo.ValueMember = "ID";
 
@@ -189,27 +183,27 @@ namespace UI.Desktop.Formularios
             cbSexo.ValueMember = "Value";
 
             //cbNacionalidad
-            this.cbNacionalidad.DataSource = nacionalidadController.GetNacionalidades();
+            this.cbNacionalidad.DataSource = await nacionalidadController.GetNacionalidades();
             this.cbNacionalidad.DisplayMember = "Descripcion";
             this.cbNacionalidad.ValueMember = "ID";
 
             //cbEstadoCivil
-            this.cbEstadoCivil.DataSource = estadoCivilController.GetEstadosCiviles();
+            this.cbEstadoCivil.DataSource = await estadoCivilController.GetEstadosCiviles();
             this.cbEstadoCivil.DisplayMember = "Descripcion";
             this.cbEstadoCivil.ValueMember = "ID";
 
             //cbResponsabilidad
-            this.cbResponsabilidad.DataSource = responsabilidadIVAController.GetResponsabilidadesIVA();
+            this.cbResponsabilidad.DataSource = await responsabilidadIVAController.GetResponsabilidadesIVA();
             this.cbResponsabilidad.DisplayMember = "Descripcion";
             this.cbResponsabilidad.ValueMember = "ID";
 
             //cbTipoDoc
-            this.cbTipoDoc.DataSource = tipoDeDocumentoController.GetTiposDeDocumento();
+            this.cbTipoDoc.DataSource = await tipoDeDocumentoController.GetTiposDeDocumento();
             this.cbTipoDoc.DisplayMember = "Descripcion";
             this.cbTipoDoc.ValueMember = "ID";
 
             //cbProvincia
-            this.cbProvincia.DataSource = provinciaController.GetProvincias();
+            this.cbProvincia.DataSource = await provinciaController.GetProvincias();
             this.cbProvincia.DisplayMember = "Descripcion";
             this.cbProvincia.ValueMember = "ID";
 
@@ -249,7 +243,7 @@ namespace UI.Desktop.Formularios
             }
         }
 
-        private void btnGuardar_Click(object sender, EventArgs e)
+        private async void btnGuardar_Click(object sender, EventArgs e)
         {
             if (this.txtNombres.Text == string.Empty || this.txtApellidos.Text == string.Empty || this.txtDni.Text == string.Empty || this.txtCuilCuit.Text == string.Empty)
             {
@@ -284,17 +278,6 @@ namespace UI.Desktop.Formularios
             cliente.IIBB = this.txtIngresosBrutos.Text;
             cliente.domicilio = txtDomicilio.Text;
 
-            //combos
-            //cliente.grupo = (GrupoClienteViewModel)this.cbGrupo.SelectedItem;
-            //cliente.nacionalidad = (NacionalidadViewModel)this.cbNacionalidad.SelectedItem;
-            //cliente.responsabilidad = (ResponsabilidadIVAViewModel)this.cbResponsabilidad.SelectedItem;
-            //cliente.sexo = cbSexo.SelectedValue.ToString();
-            //cliente.subGrupo = (SubGrupoClienteViewModel)this.cbSubgrupo.SelectedItem;
-            //cliente.tipoDeDocumento = (TipoDeDocumentoViewModel)this.cbTipoDoc.SelectedItem;
-            //cliente.estadoCivil = (EstadoCivilViewModel)this.cbEstadoCivil.SelectedItem;
-            //cliente.provincia = (ProvinciaViewModel)this.cbProvincia.SelectedItem;
-            //cliente.localidad = (LocalidadViewModel)this.cbLocalidad.SelectedItem;
-
             cliente.GrupoClienteID = (int)this.cbGrupo.SelectedValue;
             cliente.NacionalidadID = (int)this.cbNacionalidad.SelectedValue;
             cliente.ResponsabilidadIVAID = (int)this.cbResponsabilidad.SelectedValue;
@@ -324,7 +307,7 @@ namespace UI.Desktop.Formularios
             #endregion
 
 
-            var inserto = clienteController.SaveCliente(cliente);
+            var inserto = await clienteController.SaveCliente(cliente);
             if (inserto == string.Empty)
             {
                 this.mensajeOK("Se han salvado los datos exitosamente");
@@ -350,11 +333,16 @@ namespace UI.Desktop.Formularios
 
             if (this.DialogResult == DialogResult.OK)
             {
-                frm.CargarGrilla("");
+                frm.CargarGrilla();
             }
 
             //liberamos la instancia de frmEditarCliente
             _instancia = null;
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

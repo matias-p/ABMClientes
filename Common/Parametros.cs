@@ -2,6 +2,7 @@
 {
     public class Parametros
     {
-        public const string ConnectionString = "Server=.;Database=Club;User Id=sa;Password=1q2w3e4r+";
+        //public const string ConnectionString = "Server=.;Database=Club;User Id=sa;Password=zzzzzz+";
+        public const string ConnectionString = "Data Source=(local)\\SQLEXPRESS;Initial Catalog=club;Integrated Security=True;";
     }
 }

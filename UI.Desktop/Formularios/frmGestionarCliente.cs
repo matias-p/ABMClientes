@@ -8,18 +8,19 @@ using UnitOfWork.SqlServer;
 using UI.Desktop.ViewModels;
 using FluentValidation.Results;
 using UI.Desktop.Controladores.Validaciones;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Linq;
 
 namespace UI.Desktop.Formularios
 {
     public partial class frmGestionarCliente : Form
     {
         private UnitOfWorkSqlServer unitOfWork;
-
         private IClienteService clienteService;
-
         private ClienteController clienteController = null;
-
         private ClienteGridViewModel registroSeleccionado;
+        private List<ClienteGridViewModel> resultadoGrilla = null;
 
         #region Singleton
         private static frmGestionarCliente _instancia;
@@ -47,6 +48,7 @@ namespace UI.Desktop.Formularios
 
             clienteService = new ClienteService(unitOfWork);
             clienteController = new ClienteController(clienteService);
+            resultadoGrilla = new List<ClienteGridViewModel>();
         }
 
         private void mensajeOK(string men)
@@ -77,30 +79,19 @@ namespace UI.Desktop.Formularios
             this.registroSeleccionado = null;
             this.dgvGrilla.ClearSelection();
         }
-
-        private void ConfigurarColumnasDataGridView()
-        {
-            this.dgvGrilla.DataSource = clienteService.GetAll();
-            this.dgvGrilla.AutoGenerateColumns = false;
-        }
-
-        public void DesactivarColumnas()
-        {
-            this.dgvGrilla.Columns["idpersona"].Visible = false;        
-        }
-
         private void frmGestionarCliente_Load(object sender, EventArgs e)
         {
-            this.CargarGrilla("");
+            this.CargarGrilla();
             this.EstiloGrilla();
-            this.InicializaCombos(); //selecciono el primer elemento de cada CB para que no arroje errores al guardar
         }
 
-        public void CargarGrilla(string texto)
+        public async void CargarGrilla()
         {
             try
             {
-                this.dgvGrilla.DataSource = clienteController.GetClientes(texto);
+                this.resultadoGrilla = (await clienteController.GetClientes()).ToList();
+                this.dgvGrilla.DataSource = resultadoGrilla;
+
                 this.dgvGrilla.AutoGenerateColumns = false;
                 this.dgvGrilla.Columns[0].Visible = false;
                 this.DeseleccionarRegistro();
@@ -127,10 +118,6 @@ namespace UI.Desktop.Formularios
             this.dgvGrilla.ReadOnly = true;
 
             this.dgvGrilla.Refresh();
-        }
-
-        private void InicializaCombos()
-        {
         }
 
         private void btnImprimir_Click(object sender, EventArgs e)
@@ -187,13 +174,7 @@ namespace UI.Desktop.Formularios
 
         private void btnActualizar_Click(object sender, EventArgs e)
         {
-            this.CargarGrilla("");
-        }
-
-        private void txtBuscarCliente_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-                this.CargarGrilla(txtBuscarCliente.Text.Trim());
+            this.CargarGrilla();
         }
 
         private void frmGestionarCliente_FormClosed(object sender, FormClosedEventArgs e)

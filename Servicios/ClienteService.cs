@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Dominio.SeedWork;
 using Servicios.Contratos;
+using System.Threading.Tasks;
 
 namespace Servicios
 {
@@ -14,72 +15,73 @@ namespace Servicios
             _unitOfWork = unitOfWork;
         }
 
-        public IEnumerable<Cliente> GetAll()
+        public async Task<IEnumerable<Cliente>> GetAll()
         {
             using (var context = _unitOfWork.Create())
             {
-                var clientes = context.Repositories.ClienteRepository.GetAll();
+                var clientes = await context.Repositories.ClienteRepository.GetAll();
 
                 foreach (var cliente in clientes)
                 {
-                    cliente.Localidad = context.Repositories.LocalidadRepository.Get(cliente.LocalidadID);
-                    cliente.Nacionalidad = context.Repositories.NacionalidadRepository.Get(cliente.NacionalidadID);
-                    cliente.SubGrupo = context.Repositories.SubGrupoClienteRepository.Get(cliente.SubGrupoID);
-                    cliente.SubGrupo.GrupoCliente = context.Repositories.GrupoClienteRepository.Get(cliente.SubGrupo.GrupoClienteID);
-                    cliente.EstadoCivil = context.Repositories.EstadoCivilRepository.Get(cliente.EstadoCivilID);
-                    cliente.TipoDeDocumento = context.Repositories.TipoDeDocumentoRepository.Get(cliente.TipoDeDocumentoID);
-                    cliente.ResponsabilidadIVA = context.Repositories.ResponsabilidadIVARepository.Get(cliente.ResponsabilidadIVAID);
+                    cliente.Localidad = await context.Repositories.LocalidadRepository.Get(cliente.LocalidadID);
+                    cliente.Localidad.Provincia = await context.Repositories.ProvinciaRepository.Get(cliente.Localidad.ProvinciaID);
+                    cliente.Nacionalidad = await context.Repositories.NacionalidadRepository.Get(cliente.NacionalidadID);
+                    cliente.SubGrupo = await context.Repositories.SubGrupoClienteRepository.Get(cliente.SubGrupoID);
+                    cliente.SubGrupo.GrupoCliente = await context.Repositories.GrupoClienteRepository.Get(cliente.SubGrupo.GrupoClienteID);
+                    cliente.EstadoCivil = await context.Repositories.EstadoCivilRepository.Get(cliente.EstadoCivilID);
+                    cliente.TipoDeDocumento = await context.Repositories.TipoDeDocumentoRepository.Get(cliente.TipoDeDocumentoID);
+                    cliente.ResponsabilidadIVA = await context.Repositories.ResponsabilidadIVARepository.Get(cliente.ResponsabilidadIVAID);
                 }
 
                 return clientes;
             }
         }
 
-        public IEnumerable<Cliente> GetAllByNombreYApellido(string texto)
+        public async Task<IEnumerable<Cliente>> GetAllByNombreYApellido(string texto)
         {
             using (var context = _unitOfWork.Create())
             {
-                var clientes = context.Repositories.ClienteRepository.GetAllByNombreYApellido(texto);
+                var clientes = await context.Repositories.ClienteRepository.GetAllByNombreYApellido(texto);
 
                 foreach (var cliente in clientes)
                 {
-                    cliente.Localidad = context.Repositories.LocalidadRepository.Get(cliente.LocalidadID);
-                    cliente.Localidad.Provincia = context.Repositories.ProvinciaRepository.Get(cliente.Localidad.ProvinciaID);
-                    cliente.Nacionalidad = context.Repositories.NacionalidadRepository.Get(cliente.NacionalidadID);
-                    cliente.SubGrupo = context.Repositories.SubGrupoClienteRepository.Get(cliente.SubGrupoID);
-                    cliente.SubGrupo.GrupoCliente = context.Repositories.GrupoClienteRepository.Get(cliente.SubGrupo.GrupoClienteID);
-                    cliente.EstadoCivil = context.Repositories.EstadoCivilRepository.Get(cliente.EstadoCivilID);
-                    cliente.TipoDeDocumento = context.Repositories.TipoDeDocumentoRepository.Get(cliente.TipoDeDocumentoID);
-                    cliente.ResponsabilidadIVA = context.Repositories.ResponsabilidadIVARepository.Get(cliente.ResponsabilidadIVAID);
+                    cliente.Localidad = await context.Repositories.LocalidadRepository.Get(cliente.LocalidadID);
+                    cliente.Localidad.Provincia = await context.Repositories.ProvinciaRepository.Get(cliente.Localidad.ProvinciaID);
+                    cliente.Nacionalidad = await context.Repositories.NacionalidadRepository.Get(cliente.NacionalidadID);
+                    cliente.SubGrupo = await context.Repositories.SubGrupoClienteRepository.Get(cliente.SubGrupoID);
+                    cliente.SubGrupo.GrupoCliente = await context.Repositories.GrupoClienteRepository.Get(cliente.SubGrupo.GrupoClienteID);
+                    cliente.EstadoCivil = await context.Repositories.EstadoCivilRepository.Get(cliente.EstadoCivilID);
+                    cliente.TipoDeDocumento = await context.Repositories.TipoDeDocumentoRepository.Get(cliente.TipoDeDocumentoID);
+                    cliente.ResponsabilidadIVA = await context.Repositories.ResponsabilidadIVARepository.Get(cliente.ResponsabilidadIVAID);
                 }
 
                 return clientes;
             }
         }
 
-        public Cliente Get(int id)
+        public async Task<Cliente> Get(int id)
         {
             using (var context = _unitOfWork.Create())
             {
-                var cliente = context.Repositories.ClienteRepository.Get(id);
+                var cliente = await context.Repositories.ClienteRepository.Get(id);
 
-                cliente.Localidad = context.Repositories.LocalidadRepository.Get(cliente.LocalidadID);
-                cliente.Nacionalidad = context.Repositories.NacionalidadRepository.Get(cliente.NacionalidadID);
-                cliente.SubGrupo = context.Repositories.SubGrupoClienteRepository.Get(cliente.SubGrupoID);
-                cliente.SubGrupo.GrupoCliente = context.Repositories.GrupoClienteRepository.Get(cliente.SubGrupo.GrupoClienteID);
-                cliente.EstadoCivil = context.Repositories.EstadoCivilRepository.Get(cliente.EstadoCivilID);
-                cliente.TipoDeDocumento = context.Repositories.TipoDeDocumentoRepository.Get(cliente.TipoDeDocumentoID);
-                cliente.ResponsabilidadIVA = context.Repositories.ResponsabilidadIVARepository.Get(cliente.ResponsabilidadIVAID);
+                cliente.Localidad = await context.Repositories.LocalidadRepository.Get(cliente.LocalidadID);
+                cliente.Nacionalidad = await context.Repositories.NacionalidadRepository.Get(cliente.NacionalidadID);
+                cliente.SubGrupo = await context.Repositories.SubGrupoClienteRepository.Get(cliente.SubGrupoID);
+                cliente.SubGrupo.GrupoCliente = await context.Repositories.GrupoClienteRepository.Get(cliente.SubGrupo.GrupoClienteID);
+                cliente.EstadoCivil = await context.Repositories.EstadoCivilRepository.Get(cliente.EstadoCivilID);
+                cliente.TipoDeDocumento = await context.Repositories.TipoDeDocumentoRepository.Get(cliente.TipoDeDocumentoID);
+                cliente.ResponsabilidadIVA = await context.Repositories.ResponsabilidadIVARepository.Get(cliente.ResponsabilidadIVAID);
 
                 return cliente;
             }
         }
 
-        public void Save(Cliente cliente)
+        public async Task Save(Cliente cliente)
         {
             using (var context = _unitOfWork.Create())
             {            
-                context.Repositories.ClienteRepository.Save(cliente);
+                await context.Repositories.ClienteRepository.Save(cliente);
 
                 // Confirmar cambios
                 context.SaveChanges();

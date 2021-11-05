@@ -1,10 +1,12 @@
 ﻿using Dominio.Entidades.General;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+
 namespace Servicios.Contratos
 {
     public interface INacionalidadService
     {
-        IEnumerable<Nacionalidad> GetAll();
-        Nacionalidad Get(int id);
+        Task<IEnumerable<Nacionalidad>> GetAll();
+        Task<Nacionalidad> Get(int id);
     }
 }

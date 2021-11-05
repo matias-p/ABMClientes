@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using Dominio.Entidades.Cliente;
 using Dominio.Contratos;
 using System.Data;
+using System.Threading.Tasks;
 
 namespace Repositorio.SqlServer
 {
@@ -15,7 +16,7 @@ namespace Repositorio.SqlServer
             this._transaction = transaction;
         }
 
-        public void Save(Cliente entidad)
+        public async Task Save(Cliente entidad)
         {
             //tabla persona
             var queryPersona = @"GN_Persona_INSUPD";
@@ -39,8 +40,8 @@ namespace Repositorio.SqlServer
             commandPersona.Parameters.AddWithValue("@GN_Localidad_ID", entidad.LocalidadID);
 
             //como recibe el objeto (por valor) le asignamos el ID obtenido y sube hasta el servicio.
-            entidad.ID = Convert.ToInt32(commandPersona.ExecuteScalar());
-
+            entidad.ID = Convert.ToInt32(await commandPersona.ExecuteScalarAsync());
+        
             //tabla cliente
             var queryCliente = @"GN_Cliente_INSUPD";
             var commandCliente = CreateCommand(queryCliente);
@@ -58,13 +59,13 @@ namespace Repositorio.SqlServer
             commandCliente.Parameters.AddWithValue("@comentario", entidad.comentario);
             commandCliente.Parameters.AddWithValue("@baja", entidad.baja);
 
-            if (commandCliente.ExecuteNonQuery() == 0)
+            if (await commandCliente.ExecuteNonQueryAsync() == 0)
             {
                 throw new Exception("No se pudo insertar el registro...");
             }
         }
 
-        public Cliente Get(int id)
+        public async Task<Cliente> Get(int id)
         {
             var result = new Cliente();
 
@@ -75,7 +76,7 @@ namespace Repositorio.SqlServer
             command.CommandType = CommandType.StoredProcedure;
             command.Parameters.AddWithValue("@ID", id);
 
-            using (var reader = command.ExecuteReader())
+            using (var reader = await command.ExecuteReaderAsync())
             {
                 if (reader.Read())
                 {
@@ -86,16 +87,17 @@ namespace Repositorio.SqlServer
             return result;
         }
 
-        public IEnumerable<Cliente> GetAll()
+        public async Task<IEnumerable<Cliente>> GetAll()
         {
             var resultList = new List<Cliente>();
 
             //el método CreateCommand de la clase abstracta Repository retorna un SqlCommand
-            var query = @"GN_Cliente_SEL_All";
+            //cuando GN_Cliente_SEL_pK no recibe parametros, devuelve todos los registros de la tabla.
+            var query = @"GN_Cliente_SEL_pK";
             var command = CreateCommand(query);
             command.CommandType = CommandType.StoredProcedure;
 
-            using (var reader = command.ExecuteReader())
+            using (var reader = await command.ExecuteReaderAsync())
             {
                 while (reader.Read())
                 {
@@ -107,7 +109,7 @@ namespace Repositorio.SqlServer
             return resultList;
         }
 
-        public IEnumerable<Cliente> GetAllByNombreYApellido(string texto)
+        public async Task<IEnumerable<Cliente>> GetAllByNombreYApellido(string texto)
         {
             var resultList = new List<Cliente>();
 
@@ -117,7 +119,7 @@ namespace Repositorio.SqlServer
             command.CommandType = CommandType.StoredProcedure;
             command.Parameters.AddWithValue("@texto", texto);
 
-            using (var reader = command.ExecuteReader())
+            using (var reader = await command.ExecuteReaderAsync())
             {
                 while (reader.Read())
                 {

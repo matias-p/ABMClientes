@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Dominio.SeedWork
 {
     public interface IReadRepository<C, P, R> where C : class
     {
-        IEnumerable<C> GetAll();//C=Class
-        C Get(P id);//P=Parameter
+        Task<IEnumerable<C>> GetAll();//C=Class
+        Task<C> Get(P id);//P=Parameter
 
         C LoadEntity(R dr);//R=Reader
     }

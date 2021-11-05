@@ -2,6 +2,7 @@
 using Dominio.SeedWork;
 using Servicios.Contratos;
 using Dominio.Entidades.General;
+using System.Threading.Tasks;
 
 namespace Servicios
 {
@@ -14,21 +15,21 @@ namespace Servicios
             _unitOfWork = unitOfWork;
         }
 
-        public Nacionalidad Get(int id)
+        public async Task<Nacionalidad> Get(int id)
         {
             using (var context = _unitOfWork.Create())
             {
-                var nacionalidad = context.Repositories.NacionalidadRepository.Get(id);
+                var nacionalidad = await context.Repositories.NacionalidadRepository.Get(id);
 
                 return nacionalidad;
             }
         }
 
-        public IEnumerable<Nacionalidad> GetAll()
+        public async Task<IEnumerable<Nacionalidad>> GetAll()
         {
             using (var context = _unitOfWork.Create())
             {
-                var nacionalidades = context.Repositories.NacionalidadRepository.GetAll();
+                var nacionalidades = await context.Repositories.NacionalidadRepository.GetAll();
 
                 return nacionalidades;
             }

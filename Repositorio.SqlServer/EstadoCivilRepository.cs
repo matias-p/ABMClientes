@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using Dominio.Entidades.Cliente;
 using Dominio.Contratos;
 using System.Data;
+using System.Threading.Tasks;
 
 namespace Repositorio.SqlServer
 {
@@ -15,7 +16,7 @@ namespace Repositorio.SqlServer
             this._transaction = transaction;
         }
 
-        public EstadoCivil Get(int id)
+        public async Task<EstadoCivil> Get(int id)
         {
             var result = new EstadoCivil();
 
@@ -26,7 +27,7 @@ namespace Repositorio.SqlServer
             command.CommandType = CommandType.StoredProcedure;
             command.Parameters.AddWithValue("@ID", id);
 
-            using (var reader = command.ExecuteReader())
+            using (var reader = await command.ExecuteReaderAsync())
             {
                 if (reader.Read())
                 {
@@ -37,7 +38,7 @@ namespace Repositorio.SqlServer
             return result;
         }
 
-        public IEnumerable<EstadoCivil> GetAll()
+        public async Task<IEnumerable<EstadoCivil>> GetAll()
         {
             //si uso dapper:
             //var estados = _context.Query<EstadoCivil>("spGetUser", commandType: CommandType.StoredProcedure);
@@ -46,12 +47,13 @@ namespace Repositorio.SqlServer
             var resultList = new List<EstadoCivil>();
 
             //el método CreateCommand de la clase abstracta Repository retorna un SqlCommand
-            var query = @"CLI_EstadoCivil_SEL_All";
+            //cuando un SP_pK no recibe parametros, devuelve todos los registros de la tabla.
+            var query = @"CLI_EstadoCivil_SEL_pK";
             var command = CreateCommand(query);
 
             command.CommandType = CommandType.StoredProcedure;
 
-            using (var reader = command.ExecuteReader())
+            using (var reader = await command.ExecuteReaderAsync())
             {
                 while (reader.Read())
                 {

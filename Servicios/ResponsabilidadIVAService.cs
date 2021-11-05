@@ -2,6 +2,7 @@
 using Dominio.SeedWork;
 using Servicios.Contratos;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Servicios
 {
@@ -14,21 +15,21 @@ namespace Servicios
             _unitOfWork = unitOfWork;
         }
 
-        public ResponsabilidadIVA Get(int id)
+        public async Task<ResponsabilidadIVA> Get(int id)
         {
             using (var context = _unitOfWork.Create())
             {
-                var responsabilidad = context.Repositories.ResponsabilidadIVARepository.Get(id);
+                var responsabilidad = await context.Repositories.ResponsabilidadIVARepository.Get(id);
 
                 return responsabilidad;
             }
         }
 
-        public IEnumerable<ResponsabilidadIVA> GetAll()
+        public async Task<IEnumerable<ResponsabilidadIVA>> GetAll()
         {
             using (var context = _unitOfWork.Create())
             {
-                var responsabilidades = context.Repositories.ResponsabilidadIVARepository.GetAll();
+                var responsabilidades = await context .Repositories.ResponsabilidadIVARepository.GetAll();
 
                 return responsabilidades;
             }

@@ -2,6 +2,7 @@
 using Dominio.SeedWork;
 using Servicios.Contratos;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Servicios
 {
@@ -14,31 +15,31 @@ namespace Servicios
             _unitOfWork = unitOfWork;
         }
 
-        public SubGrupoCliente Get(int id)
+        public async Task<SubGrupoCliente> Get(int id)
         {
             using (var context = _unitOfWork.Create())
             {
-                var subGrupoCliente = context.Repositories.SubGrupoClienteRepository.Get(id);
+                var subGrupoCliente = await context.Repositories.SubGrupoClienteRepository.Get(id);
 
                 return subGrupoCliente;
             }
         }
 
-        public IEnumerable<SubGrupoCliente> GetAll()
+        public async Task<IEnumerable<SubGrupoCliente>> GetAll()
         {
             using (var context = _unitOfWork.Create())
             {
-                var subGruposCliente = context.Repositories.SubGrupoClienteRepository.GetAll();
+                var subGruposCliente = await context.Repositories.SubGrupoClienteRepository.GetAll();
 
                 return subGruposCliente;
             }
         }
 
-        public IEnumerable<SubGrupoCliente> GetAllByGrupoClienteID(int grupoClienteID)
+        public async Task<IEnumerable<SubGrupoCliente>> GetAllByGrupoClienteID(int grupoClienteID)
         {
             using (var context = _unitOfWork.Create())
             {
-                var subGruposCliente = context.Repositories.SubGrupoClienteRepository.GetAllByGrupoClienteID(grupoClienteID);
+                var subGruposCliente = await context.Repositories.SubGrupoClienteRepository.GetAllByGrupoClienteID(grupoClienteID);
 
                 return subGruposCliente;
             }
